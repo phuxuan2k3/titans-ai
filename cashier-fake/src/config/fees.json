@@ -1,0 +1,195 @@
+{
+  "version": "1.0",
+  "description": "Cấu hình phí cashier-fake. Rules được evaluate theo thứ tự, tất cả rules khớp sẽ được cộng lại.",
+  "feeTypes": {
+    "percentage": "Tính theo % của số tiền gốc. Field: value (số %)",
+    "flat": "Phí cố định. Field: value (VNĐ)",
+    "percentage_with_min": "% nhưng không nhỏ hơn mức tối thiểu. Fields: value (%), min (VNĐ)",
+    "percentage_with_max": "% nhưng không lớn hơn mức tối đa. Fields: value (%), max (VNĐ)"
+  },
+  "rules": [
+    {
+      "id": "phone_topup_service_fee",
+      "name": "Phí dịch vụ nạp thẻ điện thoại",
+      "enabled": true,
+      "conditions": {
+        "orderTypes": [
+          "phone_topup_mobifone",
+          "phone_topup_viettel",
+          "phone_topup_vinaphone",
+          "phone_topup_gmobile",
+          "phone_topup_reddi"
+        ],
+        "paymentMethods": null,
+        "amountRange": null
+      },
+      "fee": {
+        "type": "percentage",
+        "value": 0.5,
+        "displayLabel": "Phí dịch vụ nạp thẻ (0.5%)"
+      }
+    },
+    {
+      "id": "airline_booking_flat_fee",
+      "name": "Phí đặt vé máy bay",
+      "enabled": true,
+      "conditions": {
+        "orderTypes": [
+          "airline_vietnam_airlines",
+          "airline_vietjet",
+          "airline_bamboo",
+          "airline_pacific"
+        ],
+        "paymentMethods": null,
+        "amountRange": null
+      },
+      "fee": {
+        "type": "flat",
+        "value": 55000,
+        "displayLabel": "Phí đặt vé (55.000đ)"
+      }
+    },
+    {
+      "id": "utility_bill_processing_fee",
+      "name": "Phí xử lý hóa đơn tiện ích",
+      "enabled": true,
+      "conditions": {
+        "orderTypes": [
+          "bill_electricity_evn",
+          "bill_electricity_vinh_long",
+          "bill_water_sawaco",
+          "bill_internet_vnpt",
+          "bill_internet_fpt",
+          "bill_tv_vtvcab"
+        ],
+        "paymentMethods": null,
+        "amountRange": null
+      },
+      "fee": {
+        "type": "flat",
+        "value": 2000,
+        "displayLabel": "Phí xử lý hóa đơn (2.000đ)"
+      }
+    },
+    {
+      "id": "game_topup_service_fee",
+      "name": "Phí dịch vụ nạp game",
+      "enabled": true,
+      "conditions": {
+        "orderTypes": [
+          "game_garena",
+          "game_vcoin",
+          "game_steam"
+        ],
+        "paymentMethods": null,
+        "amountRange": null
+      },
+      "fee": {
+        "type": "percentage",
+        "value": 1.0,
+        "displayLabel": "Phí dịch vụ game (1%)"
+      }
+    },
+    {
+      "id": "international_card_surcharge",
+      "name": "Phụ phí thẻ quốc tế",
+      "enabled": true,
+      "conditions": {
+        "orderTypes": null,
+        "paymentMethods": ["international_card"],
+        "amountRange": null
+      },
+      "fee": {
+        "type": "percentage_with_min",
+        "value": 2.0,
+        "min": 15000,
+        "displayLabel": "Phụ phí thẻ quốc tế (2%, tối thiểu 15.000đ)"
+      }
+    },
+    {
+      "id": "bank_transfer_fee",
+      "name": "Phí giao dịch ngân hàng",
+      "enabled": true,
+      "conditions": {
+        "orderTypes": null,
+        "paymentMethods": ["bank_msb", "bank_acb"],
+        "amountRange": null
+      },
+      "fee": {
+        "type": "flat",
+        "value": 5000,
+        "displayLabel": "Phí giao dịch ngân hàng (5.000đ)"
+      }
+    },
+    {
+      "id": "high_value_protection_fee",
+      "name": "Phí bảo vệ giao dịch lớn",
+      "enabled": true,
+      "conditions": {
+        "orderTypes": null,
+        "paymentMethods": null,
+        "amountRange": { "min": 10000000, "max": null }
+      },
+      "fee": {
+        "type": "flat",
+        "value": 10000,
+        "displayLabel": "Phí bảo vệ GD > 10M (10.000đ)"
+      }
+    },
+    {
+      "id": "tax_processing_fee",
+      "name": "Phí xử lý thuế",
+      "enabled": true,
+      "conditions": {
+        "orderTypes": [
+          "tax_personal_income",
+          "tax_vat",
+          "tax_corporate"
+        ],
+        "paymentMethods": null,
+        "amountRange": null
+      },
+      "fee": {
+        "type": "percentage_with_max",
+        "value": 0.1,
+        "max": 50000,
+        "displayLabel": "Phí xử lý thuế (0.1%, tối đa 50.000đ)"
+      }
+    },
+    {
+      "id": "insurance_service_fee",
+      "name": "Phí dịch vụ bảo hiểm",
+      "enabled": true,
+      "conditions": {
+        "orderTypes": [
+          "insurance_bic",
+          "insurance_pvi",
+          "insurance_bao_viet"
+        ],
+        "paymentMethods": null,
+        "amountRange": null
+      },
+      "fee": {
+        "type": "percentage",
+        "value": 0.3,
+        "displayLabel": "Phí dịch vụ bảo hiểm (0.3%)"
+      }
+    },
+    {
+      "id": "domestic_card_fee",
+      "name": "Phí thẻ nội địa",
+      "enabled": true,
+      "conditions": {
+        "orderTypes": null,
+        "paymentMethods": ["domestic_card"],
+        "amountRange": null
+      },
+      "fee": {
+        "type": "percentage_with_min",
+        "value": 0.5,
+        "min": 3000,
+        "displayLabel": "Phí thẻ nội địa (0.5%, tối thiểu 3.000đ)"
+      }
+    }
+  ]
+}

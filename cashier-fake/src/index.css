@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * { box-sizing: border-box; }
+  body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    @apply bg-slate-100 min-h-screen;
+    -webkit-font-smoothing: antialiased;
+  }
+  #root {
+    @apply min-h-screen;
+  }
+}
+
+@layer utilities {
+  .amount-text {
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.03em;
+  }
+}

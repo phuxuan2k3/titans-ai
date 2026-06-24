@@ -1,0 +1,27 @@
+{
+  "wallet_schemes": [
+    {
+      "name": "Phí giao dịch App Vé Máy Bay (VietQR)",
+      "key": "FLIGHT_TICKET_VIETQR_FEE",
+      "type": "TRANSACTION",
+      "condition": "APP_FLIGHT_TICKET & PAYMENT_SOURCE_VIETQR",
+      "formulas": [
+        {
+          "condition": "FIRST_5_TRANS",
+          "expression": "0",
+          "display_data": {
+            "message_template": "Miễn phí",
+            "message_template_en": "Free"
+          }
+        },
+        {
+          "expression": "1000",
+          "display_data": {
+            "message_template": "1.000đ",
+            "message_template_en": "1,000 VND"
+          }
+        }
+      ]
+    }
+  ]
+}

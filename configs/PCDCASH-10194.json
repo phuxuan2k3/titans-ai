@@ -1,0 +1,27 @@
+{
+  "wallet_schemes": [
+    {
+      "name": "Phí giao dịch App Mua truyện tranh",
+      "key": "FEE_COMIC_BOOK_APP",
+      "type": "TRANSACTION",
+      "condition": "APP_COMIC_BOOK & (CARD_SCHEME_VISA | PAYMENT_SOURCE_ZALOPAY)",
+      "formulas": [
+        {
+          "condition": "FIRST_5_TRANS",
+          "expression": "0",
+          "display_data": {
+            "message_template": "Miễn phí (5 giao dịch đầu)",
+            "message_template_en": "Free (first 5 transactions)"
+          }
+        },
+        {
+          "expression": "AMOUNT * 0.01",
+          "display_data": {
+            "message_template": "Phí 1% giá trị giao dịch",
+            "message_template_en": "Fee: 1% of transaction value"
+          }
+        }
+      ]
+    }
+  ]
+}
